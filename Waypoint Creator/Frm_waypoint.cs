@@ -618,7 +618,7 @@ namespace Frm_waypoint
                 if (waittime == "")
                     waittime = "0";
 
-                SQLtext = SQLtext + "(@PATH," + (l + 1) + ",";
+                SQLtext = SQLtext + "(@PATH," + (l + 1 - duplicate) + ",";
 
                 for (var ll = 1; ll < 4; ll++)
                 {
@@ -657,7 +657,7 @@ namespace Frm_waypoint
                 if (waittime == "")
                     waittime = "0";
 
-                SQLtext = SQLtext + "(@GUID," + (l + 1 - duplicate) + ",";
+                SQLtext = SQLtext + "(@GUID," + (l + 1 ) + ",";
 
                 for (var ll = 1; ll < 4; ll++)
                 {
