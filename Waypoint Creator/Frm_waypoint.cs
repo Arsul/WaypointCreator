@@ -601,7 +601,7 @@ namespace Frm_waypoint
             string allsave="";
             for (var l = 0; l < gridWaypoint.RowCount; l++)
             {
-                string save=Convert.ToString(gridWaypoint[1, l].Value)+Convert.ToString(gridWaypoint[2, l].Value)+Convert.ToString(gridWaypoint[3, l].Value);
+                string save="%" + Convert.ToString(gridWaypoint[1, l].Value)+Convert.ToString(gridWaypoint[2, l].Value)+Convert.ToString(gridWaypoint[3, l].Value) + "%";
                 if (allsave.Contains(save))
                 {
                     duplicate=duplicate+1;
