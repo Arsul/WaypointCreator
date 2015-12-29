@@ -363,7 +363,7 @@ namespace Frm_waypoint
                             sniff.z = packetline[9];
                             sniff.o = "0";
 
-                            if (lines[i].Contains("[0]") || lines[i].Contains("[1]")) { }
+                            /*if (lines[i].Contains("[0]") || lines[i].Contains("[1]")) { }
                             else
                             {
                                 DataRow dr = dt.NewRow();
@@ -376,7 +376,7 @@ namespace Frm_waypoint
                                 dr[6] = sniff.time;
                                 dt.Rows.Add(dr);
                                 sniff.entry = "";
-                            }
+                            }*/
                         }
 
                     } while (lines[i] != "");
