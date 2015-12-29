@@ -597,9 +597,17 @@ namespace Frm_waypoint
             SQLtext = SQLtext + "INSERT INTO `creature_addon` (`guid`,`path_id`,`mount`,`bytes1`,`bytes2`,`emote`,`auras`) VALUES (@NPC,@PATH,0,0,1,0, '');" + "\r\n";
             SQLtext = SQLtext + "DELETE FROM `waypoint_data` WHERE `id`=@PATH;" + "\r\n";
             SQLtext = SQLtext + "INSERT INTO `waypoint_data` (`id`,`point`,`position_x`,`position_y`,`position_z`,`orientation`,`delay`,`move_type`,`action`,`action_chance`,`wpguid`) VALUES" + "\r\n";
-
+            var duplicate=0;
+            string allsave="";
             for (var l = 0; l < gridWaypoint.RowCount; l++)
             {
+                string save=Convert.ToString(gridWaypoint[1, l].Value)+Convert.ToString(gridWaypoint[2, l].Value)+Convert.ToString(gridWaypoint[3, l].Value);
+                if (allsave.Contains(save))
+                {
+                    duplicate=duplicate+1;
+                    continue;
+                }
+                allsave=allsave+save;
                 string facing = Convert.ToString(gridWaypoint[4, l].Value);
                 if (facing == "")
                     facing = "0";
@@ -638,9 +646,9 @@ namespace Frm_waypoint
             SQLtext = SQLtext + "UPDATE `creature` SET `position_x`=" + Convert.ToString(gridWaypoint[1, gridWaypoint.RowCount - 1].Value) + ",`position_y`=" + Convert.ToString(gridWaypoint[2, gridWaypoint.RowCount - 1].Value) + ",`position_z`=" + Convert.ToString(gridWaypoint[3, gridWaypoint.RowCount - 1].Value) + " WHERE `guid`=@GUID;" + "\r\n";
             SQLtext = SQLtext + "DELETE FROM `creature_movement` WHERE `id`=@GUID;" + "\r\n";
             SQLtext = SQLtext + "INSERT INTO `creature_movement` (`id`,`point`,`position_x`,`position_y`,`position_z`,`waittime`,`script_id`,`textid1`,`textid2`,`textid3`,`textid4`,`textid5`,`emote`,`spell`,`wpguid`,`orientation`,`model1`,`model2`) VALUES" + "\r\n";
-
             for (var l = 0; l < gridWaypoint.RowCount; l++)
             {
+                
                 string facing = Convert.ToString(gridWaypoint[4, l].Value);
                 if (facing == "")
                     facing = "0";
@@ -649,7 +657,7 @@ namespace Frm_waypoint
                 if (waittime == "")
                     waittime = "0";
 
-                SQLtext = SQLtext + "(@GUID," + (l + 1) + ",";
+                SQLtext = SQLtext + "(@GUID," + (l + 1 - duplicate) + ",";
 
                 for (var ll = 1; ll < 4; ll++)
                 {
